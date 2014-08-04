@@ -1,0 +1,218 @@
+# -*- org -*-
+
+# Time-stamp: <2012-08-15 15:41:15 Wednesday by ahei>
+
+#+OPTIONS: ^:nil author:nil timestamp:nil creator:nil
+#+INFOJS_OPT: view:info toc:nil
+
+轻量标记语言
+
+** 什么是
+   维基百科定义:
+   : A lightweight markup language is a markup language with a simple syntax, designed to be easy for a human to enter with a simple text editor, and easy to read in its raw form.
+   - 首先轻量标记语言是标记语言, 标记语言是啥? 看看HTML(Hypertext Markup Language)就知道了.
+   - 其次易读易写, 使用世界上最简单的编辑器记事本就能搞定.
+
+** 能做啥
+   用户只要用一些简单的语法, 就能以一种所见即所得的方式, 获得一份漂亮的文档, 这中文档能转换成各种各样的常见格式, 比如html、pdf、latex、docbook等, 主要用于:
+   - 书写文档
+   - 内容发布 \\
+     比如github大量的把GFM(github flavored markdown)用于代码提交说明、提交评注、问题描述、项目的README文件、维基页面、用户主页和项目主页上, 还比如各种wiki也是轻量标记语言,
+     - [[https://github.com/haxney/ezbl/][github支持org]]
+     - [[https://github.com/textmate/textmate][github支持markdown]]
+     - [[https://github.com/bigmlcom/python][github支持rst]]
+   - 个人主页开发 \\
+     - [[http://www.worldhello.net/gotgithub/][GotGitHub]]
+     - [[http://book.42qu.com/][42区文档中心]]
+     - [[http://emacser.com/evernote-mode.htm][Emacs中文网]]
+
+** 为什么要
+   看完上面的能做啥后, 我们很容易就想到我们为什么需要轻量标记语言, 而不去使用那些字处理器了
+   1. 语法简单, 易写易读, 我们用任何的编辑器都可以编辑
+   2. 格式开放, 能转换成其他各种常用的格式
+   3. 文本文件, 相对于字处理器产生的二进制文件, 易于diff, 这样就可以用版本控制系统来管理
+   4. 在内容发布网站发布简单的内容时, 轻量标记语言更合适
+     
+** 有哪些
+*** 标记语言
+    - 1971, troff, Bell Labs
+    - 1978, TeX, Donald Knuth
+    - 1980初期, LaTeX, Leslie Lamport
+    - 1982, PostScript, John Warnock和Charles Geschke（Adobe Systems）
+    - 1986, SGML, ISO 8879:19861
+    - 1991, HTML, Tim Berners-Lee
+    - 1991, DocBook, HAL Computer Systems和O’Reilly & Associates
+    - 1998, XML 1.0, W3C
+
+*** 轻量标记语言
+    - 1998, BBCode, Ultimate Bulletin Board
+    - 2001, txt2tags, txt2tags team
+    - 2002, reStructuredText, David Goodger
+    - 2002, AsciiDoc, Stuart Rackham
+    - 2004, Markdown, John Gruber
+
+*** 比较
+    - [[http://en.wikipedia.org/wiki/Lightweight_markup_language][维基百科: 轻量标记语言]]
+    - [[http://www.worldhello.net/gotgithub/appendix/markups.html][附录：轻量级标记语言]]
+    - [[http://bigclean.is-programmer.com/posts/19602.html][轻量标记语言的比较]]
+    - [[http://stdio.tumblr.com/lightdoc][轻量级文档写作]]
+
+    几大流行语言比较:
+    - Markdown \\
+      - 优点 \\
+        非常流行, 有一些大型用户, 比如Stack Overflow、Reddit、GitHub、Posterous、Tumblr（这两个已被GFW认证）. github有其自己的markdown实现[[http://github.github.com/github-flavored-markdown/][GitHub Flavored Markdown]]. 虽然这个语言很简单，但也有人用这个语言写了一本书：[[http://progit.org/2009/07/28/the-gory-details.html][《Pro Git》]].
+      - 缺点 \\
+        标准的Markdown语法缺乏如表格等关键特性的支持，虽然不同的解析器都对其语法进行了扩展，但实现各有不同，造成一定的混乱。
+    - reStructuredText \\
+      是python的docutils的组成部分, python的官方文档工具. pythoner的最爱. 插上sphinx的翅膀之后, 建站非常方便. 功能比较强大.
+    - Emacs Org Mode \\
+      背靠着Emacs这颗大树, 它成为所有轻量标记语言中功能最为强大的语言, 它的功能主要包括文档发布和[[http://zh.wikipedia.org/wiki/GTD][GTD管理]]. Org相对其他轻量标记语言语法更简单. Emacser最爱用Org来写文档. [[https://github.com/hsitz/VimOrganizer][vi现在也有Org的插件了]].
+
+** reStructuredText
+*** sphinx
+    : mkdir note
+    : cd note
+    : sphinx-quickstart
+    : make html
+
+*** 用Emacs编辑
+    [[http://docutils.sourceforge.net/docs/user/emacs.html][Emacs插件]]
+   
+** Emacs Org Mode
+*** 文档结构
+    : *
+    : **
+    : ***
+    大纲图是别的轻量标记语言所欠缺的.
+    
+*** 富文本编辑
+    - 引用 \\
+      : : xxxx
+    - 粗体/斜体/下划线
+      : *bold*, /italic/, _underlined_, +delete+
+    - 图片 \\
+      : [[xxx.jpg]]
+    - 代码 \\
+      : #+BEGIN_SRC lua
+      : LINK_ACTIONS = {["/artist/.*"] = processSongList}
+      :  
+      : function processSongList()
+      :    enter("songlist")
+      :  
+      :    leave()
+      :  
+      :    extract([[<div class="listen_singerintro_infroB">(?<singerInfo>.*?)</div>]])
+      : end
+      : #+END_SRC
+
+      效果:
+      #+BEGIN_SRC lua
+      LINK_ACTIONS = {["/artist/.*"] = processSongList}
+       
+      function processSongList()
+         enter("songlist")
+       
+         leave()
+       
+         extract([[<div class="listen_singerintro_infroB">(?<singerInfo>.*?)</div>]])
+      end
+      #+END_SRC
+    - 内嵌html \\
+      : #+BEGIN_HTML
+      : xxx
+      : #+END_HTML
+
+*** 表格
+    #+ATTR_HTML: border="1" rules="all" frame="all"
+    | 命令                                        | 含义           |
+    |---------------------------------------------+----------------|
+    | M-x org-table-create-or-convert-from-region | 创建表格       |
+    | M-<left>/M-<right>                          | 左右移动列     |
+    | M-<up>/M-<down>                             | 上下移动行     |
+    | C-c +                                       | 累加列值       |
+    | C-c C-c                                     | 调整表格       |
+    | <digit>                                     | 设置列最大长度 |
+    | C-c `                                       | 编辑列         |
+    | C-c ^                                       | 对列排序       |
+
+    自动计算:
+    #+ATTR_HTML: border="1" rules="all" frame="all"
+    |   |  N | N^2 | N^3 |  N^4 |   sqrt(n) |
+    |---+----+-----+-----+------+-----------|
+    | / | <> |   < |     |    > |         < |
+    | # |  1 |   1 |   1 |    1 |         1 |
+    | # |  2 |   4 |   8 |   16 |    1.4142 |
+    | # |  3 |   9 |  27 |   81 | 1.7320508 |
+    | # |  5 |  25 | 125 |  625 | 2.2360680 |
+    #+TBLFM: $3=$2^2::$4=$2^3::$5=$2^4::$6=sqrt($2)
+
+    公式计算:
+    #+ATTR_HTML: border="1" rules="all" frame="all"
+    |---+-------------+---+-----+--------------------------------------|
+    |   | Func        | n | x   | Result                               |
+    |---+-------------+---+-----+--------------------------------------|
+    | # | exp(x)      | 1 | x   | 1 + x                                |
+    | # | exp(x)      | 2 | x   | 1 + x + x^2 / 2                      |
+    | # | exp(x)      | 3 | x   | 1 + x + x^2 / 2 + x^3 / 6            |
+    | # | x^2+sqrt(x) | 2 | x=0 | x*(0.5 / 0) + x^2 (2 - 0.25 / 0) / 2 |
+    | # | x^2+sqrt(x) | 2 | x=1 | 2 + 2.5 x - 2.5 + 0.875 (x - 1)^2    |
+    | * | tan(x)      | 3 | x   | 0.0175 x + 1.77e-6 x^3               |
+    |---+-------------+---+-----+--------------------------------------|
+    #+TBLFM: $5=taylor($2,$4,$3)
+
+**** 复杂的表格
+     #+ATTR_HTML: border="1" rules="all" frame="all"
+     | 命令                            | 含义           |
+     |---------------------------------+----------------|
+     | M-x table-insert                | 创建复杂的表格 |
+     | M-x table-split-cell-vertically | 垂直切分       |
+     | C- -                            | 水平切分       |
+     
+     #+ATTR_HTML: border="1" rules="all" frame="all"
+     +----------------------+-----+---------------+
+     | 1                    |  2  |3              |
+     +----------------------+-----+----+----------+
+     |   4                  |5    |6   |7         |
+     +----------+-----------+-----+----+----------+
+     |  9       |  10       | 11  |  12           |
+     +----------+-----------+-----+---------------+
+
+*** GTD
+    #+ATTR_HTML: border="1" rules="all" frame="all"
+    | 命令               | 含义                            |
+    |--------------------+---------------------------------|
+    | M-S-<RET>          | 增加TODO                        |
+    | C-c ,              | 设置优先级                      |
+    | [%] or [/]         | 设置子任务                      |
+    | C-c !              | 插入时间戳                      |
+    | S-<left>/S-<right> | 增加/减少一天                   |
+    | S-<up>/S-<down>    | 在光标所在日期的单位上增加/减少 |
+    | C-c C-d            | 设置deadline                    |
+    | C-c C-s            | 设置任务开始执行的时间          |
+    | C-c C-x C-i        | 对任务开始计时                  |
+    | C-c C-x C-o        | 对任务停止计时                  |
+    | C-c C-x C-d        | 显示任务的总用时                |
+    *Org中的时间选择器恐怕是世界上用户体验最好的时间选择器!*
+    
+*** 导出
+    #+ATTR_HTML: border="1" rules="all" frame="all"
+    | 命令                    | 含义         |
+    |-------------------------+--------------|
+    | M-x org-export-as-html  | 导出成html   |
+    | M-x org-export-as-ascii | 导出成纯文本 |
+    nb的以info形式导出: 在文件最开始增加:
+    : #+INFOJS_OPT: view:info toc:nil
+    
+*** MobileOrg
+    当今时代, 各路诸侯争先抢占无线市场, 人家Org 2009年就已经抢占市场了.
+    
+*** 流程图怎么办
+    见下次分享, :)
+    
+** 参考资料
+   - [[http://en.wikipedia.org/wiki/Lightweight_markup_language][维基百科: 轻量标记语言]]
+   - [[http://www.worldhello.net/gotgithub/appendix/markups.html][附录：轻量级标记语言]]
+   - [[http://bigclean.is-programmer.com/posts/19602.html][轻量标记语言的比较]]
+   - [[http://stdio.tumblr.com/lightdoc][轻量级文档写作]]
+   - [[http://wstudio.web.fc2.com/others/restructuredtext.html][reStructuredText 简明教程]]
+   - [[http://book.42qu.com/rst.html][reStructuredText简明教程]]

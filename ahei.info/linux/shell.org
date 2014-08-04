@@ -1,0 +1,478 @@
+# -*- org -*-
+
+# Time-stamp: <2011-11-30 23:36:32 Wednesday by taoshanwen>
+
+#+OPTIONS: ^:nil author:nil timestamp:nil creator:nil
+
+灵异的shell
+
+#+BEGIN_HTML
+<div align="center">陶善文</div>
+#+END_HTML
+
+** 引子
+我06年开始接触shell编程, 一开始照着别人的例子写些简单的脚本, 后来在网上找些shell语法的教程来看看(我想大多数同学学习shell也是这么个过程), 觉得shell挺简单的, 比其他语言简单多了. 但是随着写shell脚本次数的增多, 发现根本不是那么回事, 觉得shell太灵异了, 经常出现一些奇怪的错误, 比如:
+1. 变量赋值
+   #+BEGIN_SRC sh
+   #!/usr/bin/env bash
+    
+   action = "$1"
+    
+   echo "You want $action"
+   #+END_SRC
+   把上面的代码保存为test.sh并加上可执行权限, 执行./test.sh exit, 得到这样的错误提示:
+   : ./test.sh: line 3: action: command not found
+   再改下:
+   #+BEGIN_SRC sh
+   #!/usr/bin/env bash
+    
+   action= "$1"
+    
+   echo "You want $action"
+   #+END_SRC
+   不错, 好像没错误了, 不过怎么啥都不打印啦? \\
+   有过其他语言编程经验的同学可能也会像我犯那样的错误, 同时会产生这样的疑问: 怎么shell中赋个值还这么多麻烦啊?
+   
+2. 判断2个字符串是否相等
+   #+BEGIN_SRC sh
+   if [ $user = "admin" ]; then
+       echo "You are admin!"
+   fi
+   #+END_SRC
+   上述代码判断一个用户是否为管理员, 但是有时候上面的代码运行时会出现这样的错误:
+   : -bash: [: =: unary operator expected
+   这意思好像是说"期待一元运算符"? 啥意思? \\
+   有的教程里指出这样就可以了:
+   #+BEGIN_SRC sh
+   if [ x$user = "xadmin" ]; then
+       echo "You are admin!"
+   fi
+   #+END_SRC
+   我试了下, 好像还真行, 为啥这样就可以呢? 这个"x"这么神奇? 其他的字母也可以这么神奇吗? \\
+   我看有的人这样写:
+   #+BEGIN_SRC sh
+   if [ "x$user" = "xadmin" ]; then
+   #+END_SRC
+   还有人这样写:
+   #+BEGIN_SRC sh
+   if [ x$user = xadmin ]; then
+   #+END_SRC
+   甚至有人这样:
+   #+BEGIN_SRC sh
+   if [ x$user = x"admin" ]; then
+   #+END_SRC
+   后来我无意中发现这样就可以了:
+   #+BEGIN_SRC sh
+   if [ "$user" = "admin" ]; then
+   #+END_SRC
+   这加不加双引号和加在哪到底有什么不同?
+
+3. read好使不
+   1. echo str | read a, 怎么$a就不是我想要的str呢?
+   2. 假如文件a的第一行是"str1 TAB str2", 执行:
+      #+BEGIN_SRC sh
+      read str < a
+      echo $str
+      #+END_SRC
+      怎么输出是"str1 str2", 而不是"str1 TAB str2"呢, 我的TAB哪去了?
+
+4. 神奇的注释 \\
+   有人说下面这些符号可以用来注释shell:
+   #+BEGIN_SRC sh
+   : << COMMENT
+   COMMENT
+   #+END_SRC
+   比如:
+   #+BEGIN_SRC sh
+   echo xxx
+    
+   : << COMMENT
+   echo "mm said, you could not touch me!"
+   COMMENT
+    
+   echo yyy
+   #+END_SRC
+   好像还真行, 但是下面这个怎么不行呢?
+   #+BEGIN_SRC sh
+   echo xxx
+    
+   : << COMMENT
+   file=a
+   result=$(grep str $file)
+   COMMENT
+    
+   echo "mm said, you can touch me!"
+   #+END_SRC
+   还有其他的神奇注释吗?
+
+其实类似上面这些灵异的例子还有很多, 但是纵观那些shell教程, 很少有能把shell的这些灵异的地方给读者讲明白的. 下面, 我结合我自己的一些经验, 力图把shell的一些本质语法给大家讲明白, 让大家在遇到一些灵异的问题时, 能迅速的定位和解决问题.
+
+** 语法介绍
+*** 定义
+**** 单词 (word)
+    一串字符构成一个单词, 也叫token
+**** name (identifier)
+    仅有字母、数字、下划线构成， 而且由字母或者下划线开头的word叫name, 也叫标识符(identifier)
+**** 元字符 (metacharacter)
+    : | & ; ( ) < > space tab
+    这些字符没有被引号引起来时, 可以用来分割单词
+
+*** 管道
+   : command | command2
+   : command |& command2
+   把command的输出通过管道连接到command2的输入, |&连标准错误也一起做为command2的输入.
+
+   这里要注意的时, command2是在子shell里面执行的, command2对环境所做的改变不会影响到command所在的shell环境. 这就解释了本文开头的问题3.1
+   
+*** 引用 (QUOTING)
+   引用用来去掉某些字符的特殊意义. 比如想使用元字符的字面意义必须对其进行引用.
+
+   引用有3类: 反斜线引用(\)、单引号引用、双引号引用.
+
+   单引号引用屏蔽单引号内的任何字符所具有的特殊意义, 包括反斜线(\), 所以单引号引用不能再包含单引号(比较杯具...)
+
+   双引号引用中除了 *$* 、 *`* 、 *\* 、 *!* , 其他特殊字符的意义都被屏蔽.
+
+   *小技巧:*
+   - $'string'
+     这个语法的意思是: string中含有的反斜线及其后的字符会被特殊解释, 比如: \t会被解释成TAB. 这个非常有用, 比如sort的字段分隔符只能是单个字符, 如果想用TAB做字段分隔符的话, 好多人都这样: sort -t "   ", 由于好多编辑器会把TAB变成4个空格, 所以这样做经常会出问题, 那现在你可以这样了: sort -t $'\t'
+
+*** 参数 (PARAMETERS)
+   参数是用来存储值的实体, 它可以是数字(0, 1, 2 ...)、name、某些特殊字符(@, *, ...). 当参数是一个name时, 也叫变量(variable), 变量赋值:
+   #+BEGIN_SRC sh
+   name=[value]
+   #+END_SRC
+   等号2边不能有空格, 如果有空格的话, shell解释程序怎么知道你到底是想要运行name命令还是给name赋值呢? 所以的shell的变量赋值才不得不这样"讲究"
+   
+   *小技巧:*
+   - shell变量也可以 *+=*
+   - 在命令之前的变量赋值语句只影响该命令, 比如:
+     #+BEGIN_SRC sh
+     LANG= sort file
+     #+END_SRC
+     上面的命令表示在运行sort file的时候LANG为空, 不会影响其他的后续命令. 你是否还记得这样的代码:
+     #+BEGIN_SRC sh
+     tmp_LANG=$LANG
+     LANG=zh_CN
+     codes ...
+     LANG=$tmp_LANG
+     #+END_SRC
+     
+**** 位置参数 (Positional Parameters)
+    $0, $1, ...
+
+    *小技巧:*
+    - 怎么重设位置参数? 用set
+    - $10可以吗? 用${10}
+
+**** 特殊参数 (Special Parameters)
+***** $*
+     : $* == $1 $2 $3 ...
+     : "$*" == "$1c$2c$3...", c为IFS的第一个字符
+
+     *IFS* 参见[[#IFS][这里]]
+     
+***** $@
+     : $2 == $*
+     : "$@" == "$1" "$2" "$3" ...
+
+    *$** 和 *$@* 啥区别? 见后文
+
+**** shell内置变量 (Shell Variables)
+***** IFS
+     :PROPERTIES:
+     :CUSTOM_ID: IFS
+     :END:
+     Internal Field Separator, 用来扩展后分割单词, read命令也是用它来分割单词. 默认值为: <space><tab><newline>
+
+***** LANG
+     这个变量控制你的环境所使用的语言(locale), 还有LC_开头的好几个shell变量也控制locale相关的一些方面. 当你sort一个含有中文的文件时, 是不是结果不如你所愿? 试试LANG=C sort
+
+***** PATH
+     可执行文件的搜索路径
+
+*** 扩展 (EXPANSION)
+   命令行被分割成单词后, 开始执行扩展. 扩展有大括号扩展(brace expansion), 波浪号扩展(tilde expansion), 参数和变量扩展(parameter and variable expansion), 算术扩展(arithmetic expansion), 命令替换(command substitution), 单词分割(word splitting), 路径扩展(pathname expansion). 扩展的优先级也如上所示. 有的系统还支持进程替换(process substitution)
+
+**** 大括号扩展
+    #+BEGIN_SRC sh
+    echo a{b,c}
+    ab ac
+     
+    echo {1..10}
+    1 2 3 4 5 6 7 8 9 10
+     
+    echo {10..1}
+    10 9 8 7 6 5 4 3 2 1
+     
+    echo {1..10..3}
+    1 4 7 10
+     
+    echo {a..f}
+    a b c d e f
+     
+    echo {a..f..2}
+    a c e
+    #+END_SRC
+
+**** 波浪号扩展
+    #+BEGIN_SRC sh
+    echo ~/sdfa
+    /home/taoshanwen/sdfa
+
+    ~+ => PWD
+    ~- => OLDPWD
+    #+END_SRC
+
+**** 参数扩展
+    ${parameter}, 就是取出parameter的值, 有很多形式:
+    - ${parameter:offset}
+    - ${parameter:offset:length} \\
+      对parameter进行substr
+
+    - ${parameter#word}
+    - ${parameter##word} \\
+      删掉匹配的前缀
+    
+    - ${parameter%word}
+    - ${parameter%%word} \\
+      删掉匹配的后缀
+
+    还有很多, 详见bash man
+
+**** 命令替换
+    $(command) 或者`command`, 把command的输出做为结果
+    
+**** 算术扩展
+    $((expression)), 对expression进行算术表达式操作, 例如:
+    #+BEGIN_SRC sh
+    echo $((9 + 8 * 9))
+    81
+     
+    echo $((9 + 8 ** 9))
+    134217737
+    #+END_SRC    
+
+**** 进程替换
+    假如我现在想比较两个目录dir1和dir2中的文件有啥不同, 我想很多人会这样做:
+    #+BEGIN_SRC sh
+    ls dir1 > 1
+    ls dir2 > 2
+    diff 1 2
+    #+END_SRC
+    但你试试这样:
+    #+BEGIN_SRC sh
+    diff <(ls dir1) <(ls dir2)
+    #+END_SRC
+    是不是也可以? 很神奇吧. 上面的这个语法<(command)就是进程替换. <(command)表示把command的输出生成一个临时文件, 并把这个文件名作为另外一个命令的参数. 对于上面的命令, 就是把"ls dir1"命令的输出生成一个临时文件, 并把临时文件名做为diff命令的第一个参数. 再举一个例子:
+    #+BEGIN_SRC sh
+    wget -q -O >(cat) http://baidu.com
+    #+END_SRC
+    wget命令会把下载后的文件保存到文件中去, 但是我们可以用上面的命令不让它保存到文件中去, 而是显示出来. wget的"-O"选项后本来应该是一个文件名的参数, 但是我们现在用>(cat)代替, 表示wget下载下来的内容放到一个临时文件中, 然后把这个临时文件名再传给>()里面的cat命令.
+    灵活运用进程替换, 将会非常的方便, *严重推荐*
+
+**** 单词分割
+    *shell解释器最为重要的一步! shell灵异的来源*
+
+    上述扩展如果没有双引号扩起来, 扩展完后, shell将会对结果用IFS进行单词分割. 例如:
+    #+BEGIN_SRC sh
+    str="a         b          c"
+
+    echo $str
+    a b c
+
+    echo "$str"
+    a         b          c
+    #+END_SRC
+    为什么加不加双引号结果会迥然不同? 因为没加双引号时, shell会对扩展结果进行单词分割, $str的扩展结果为"a         b          c", 分割后变成3个单词a、b、c, 这3个单词做为echo命令的三个参数, 最终输出结果自然是"a b c"了.
+
+    想起来本文开头的3.2问题了吗? 知道怎么回事了吧?
+
+    另外, 扩展结果为空的话, 如果没有被双引号或者单引号扩起来的话, 会被删掉. 例如:
+    #+BEGIN_SRC sh
+    #!/usr/bin/env bash
+     
+    user="$1"
+     
+    mysql -u $user db -e "$sql"
+    #+END_SRC
+    上面这个脚本如果第一个参数为空的话, $user将会被删掉, 从而mysql的用户名会变成db, 正确的代码应该是:
+    #+BEGIN_SRC sh
+    mysql -u "$user" db -e "$sql"
+    #+END_SRC
+    
+    那你知道下面这些代码的错误之处了吗?
+    #+BEGIN_SRC sh
+    str=$(cat file)
+
+    for line in "$str"; do
+        echo "$line"
+    done
+    #+END_SRC
+    
+    说到这里, 我们来说说$*和$@的差别. 它们在不加双引号时完全一样, 但是不加双引号时, 他们都有一个问题, 就是扩展会进行单词分割, 如果输入的参数中含有空格, 可能有时候结果就不是我们想要的了, 比如:
+    #+BEGIN_SRC sh
+    #!/usr/bin/env bash
+     
+    for i in $*; do
+        echo $i
+    done    
+    #+END_SRC
+    保存上述的程序为test.sh, 该程序想打印每个输入参数,
+    #+BEGIN_SRC sh
+    taoshanwen@taoshanwen-laptop ~$ ./test.sh ab cd ef
+    ab
+    cd
+    ef
+
+    taoshanwen@taoshanwen-laptop ~$ ./test.sh "ab xx" "cd yy" "ef zz"
+    ab
+    xx
+    cd
+    yy
+    ef
+    zz
+    #+END_SRC
+    上述结果并不是我们想要的, 那怎么取得准确的输入参数呢? "$@"可以解决, 你可以试试, :)
+
+**** 路径扩展
+    如果当前路径下有文件ab、ac、ad, 那么:
+    #+BEGIN_SRC sh
+    echo a*
+    ab ac ad
+    #+END_SRC    
+
+**** 删除引用(Quote Removal)
+    经过上述扩展之后, 对于不是由于上述扩展产生的并且没有被引用的双引号、单引号、反斜线都会被删掉， 例如:
+    #+BEGIN_SRC sh
+    echo "xx" => xx
+    echo a"xx" => axx
+    #+END_SRC
+
+    经过上面这么多的了解, 我们大致知道了shell解释器的解释过程:
+    #+BEGIN_DOT shell.png -Tpng
+    digraph shell
+    {
+        label = "shell解释器"
+        labelloc = "t"
+     
+        command[label = "shell命令", shape = "folder", style = "rounded,filled", fillcolor = "pink"]
+        word_split1[label = "单词分割", style = "rounded,filled", fillcolor = "pink"]
+        word_split2[label = "单词分割", style = "rounded,filled", fillcolor = "cornflowerblue"]
+        brace[label = "大括号扩展", style = "rounded,filled", fillcolor = "pink"]
+        tilde[label = "波浪号扩展", style = "rounded,filled", fillcolor = "pink"]
+        parameter[label = "参数扩展", style = "rounded,filled", fillcolor = "pink"]
+        arithmetic[label = "算术扩展", style = "rounded,filled", fillcolor = "pink"]
+        pathname[label = "路径扩展", style = "rounded,filled", fillcolor = "pink"]
+        command_sub[label = "命令替换", style = "rounded,filled", fillcolor = "pink"]
+        process[label = "进程替换", style = "rounded,filled", fillcolor = "pink"]
+        process[label = "进程替换", style = "rounded,filled", fillcolor = "pink"]
+        quote_removal[label = "引用删除", style = "rounded,filled", fillcolor = "pink"]
+        execute[label = "执行命令", style = "rounded,filled", fillcolor = "pink"]
+        
+        command -> word_split1 -> brace -> tilde -> parameter -> arithmetic -> command_sub -> word_split2 -> pathname -> quote_removal -> execute
+        word_split1 -> process -> word_split2
+    }
+    #+END_DOT
+    
+*** 重定向
+**** Here Documents
+    : <<[-]word
+    : here-document
+    : delimiter
+    把here-document作为某个命令的标准输入. 例子:
+    #+BEGIN_SRC sh
+    grep a << EOF
+    asdf
+    qweszd
+    asdf
+    EOF
+    #+END_SRC
+
+    如果word用双引号括住, delimiter就是word删除引用后的结果, here-document里面不进行任何扩展. 如果word没有用双引号括住, 那么here-document里面会进行参数替换、命令替换、算术扩展.
+
+    我们再来看看本文开头说的那个神奇的注释, 
+    #+BEGIN_SRC sh
+    : << COMMENT
+    COMMENT
+    #+END_SRC
+    *":"* 是一个shell内置命令, 它不干任何事情, 它的返回值为0. 这样就好理解了, 被注释的内容实际上是作为 *:* 的标准输入, 而这个命令啥事情都没干, 起到注释的作用了. 但是你现在知道为啥下面这个没起到注释作用了吗? 咋解决呢?
+    #+BEGIN_SRC sh
+    echo xxx
+     
+    : << COMMENT
+    file=a
+    result=$(grep str $file)
+    COMMENT
+     
+    echo "mm said, you can touch me!"
+    #+END_SRC
+    
+**** Here Strings
+    : <<< here-strings
+    把word作为命令的标准输入, 例子:
+    grep a <<< abc
+
+** 小技巧
+  - type \\
+    这个内置命令比which强大多了, 可以查找别名、函数、内置命令
+    : taoshanwen@taoshanwen-laptop ~$ type ls
+    : ls 是 `ls --color -N --show-control-chars' 的别名
+    : ls 是 /bin/ls
+    :  
+    : taoshanwen@taoshanwen-laptop ~$ type [
+    : [ 是 shell 内嵌
+    : [ 是 /usr/bin/[    
+  - 丰富多彩 \\
+    1. grep有个--color选项, 可以高亮匹配的地方, 非常不错
+    2. 在你的.bashrc里面加入下面的代码:
+       #+BEGIN_SRC sh
+       # less color configure
+       # blue
+       export LESS_TERMCAP_mb=$'\E[01;34m'
+       # red
+       export LESS_TERMCAP_md=$'\E[01;31m'
+       # magenta
+       export LESS_TERMCAP_me=$'\E[01;35m'
+       # write
+       export LESS_TERMCAP_se=$'\E[0m'
+       # yellow
+       export LESS_TERMCAP_so=$'\E[01;44;33m'
+       # cyan
+       export LESS_TERMCAP_ue=$'\E[01;36m'
+       # green
+       export LESS_TERMCAP_us=$'\E[01;32m'
+       #+END_SRC
+       保证你的man会色彩缤纷, 重点突出, 非常方便
+  - [[]]和[]的区别 \\
+    1. [[]]内不进行单词分割和路径扩展, 所以 [[ $a = ab ]]是可以的. []内则进行所有的扩展, [ $a = ab ]是不保险的.
+    2. [[]]内的<>是用当前locale做字符串比较的, []内的<>是根据ASCII顺序做比较的, 2者都不是对数字进行比较的, 这个需要注意, 比如可以试试[[ 3 > 11 ]]; echo $?, 是不是返回0? 另外, [只是内置的命令, 所以不能直接[ 3 < 2 ], 这样的话, <是元字符, 当作重定向符号了, 需要对<进行转义, 需要这样 [ 3 "<" 2 ]
+    3. [[]]的==、!=、=~确实是正则匹配的, 具体用法可以见bash man
+
+** 工具
+*** log4sh
+   http://sourceforge.net/projects/log4sh/, shell里的日志工具, 和log4系列的其他日志库配置基本差不多
+   
+*** shunit
+   http://shunit.sourceforge.net/, shell的单元测试工具
+
+*** bashdb
+   http://bashdb.sourceforge.net/, shell的调试工具
+
+** shell快捷键
+  [[http://ahei.info/bash.htm][高效操作Bash]]
+  
+** shell炸弹
+  : :() { :|:&};:
+  上面的命令能迅速的灭了你的系统, *慎用!* ulimit -u进行限制
+  
+** shell加密
+*** shc
+   http://www.datsi.fi.upm.es/~frosal/, 简单的加密工具, 会把shell转换成一个二进制文件
+   
+*** wzsh
+   http://wzce.tripod.com/wzsh.html, 更加强大的加密工具
+   
+** 宝典
+  - [[http://www.linuxsir.org/main/doc/abs/abs3.7cnhtm/index.html][高级Bash脚本编程指南]]
+  - bash man, [[http://ahei.info/chinese-bash-man.htm][中文bash man]]

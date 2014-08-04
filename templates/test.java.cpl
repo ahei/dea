@@ -1,0 +1,18 @@
+/* -*- java -*- */
+
+/* Time-stamp: <2013-12-18 11:56:40 Wednesday by ahei> */
+
+/**
+ * @author ahei
+ */
+
+import org.junit.Test;
+
+public class (>>>FILE_SANS<<<)
+{
+    @Before
+    public void setup()
+    {
+        (>>>POINT<<<)
+    }
+}

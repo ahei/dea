@@ -1,0 +1,20 @@
+/**
+ * [Copyright]
+ * @author ahei
+ */
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+public class (>>>FILE_SANS<<<) extends Assert {
+    @Before
+    public void setUp() throws Exception {
+        (>>>POINT<<<)
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
+}
