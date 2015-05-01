@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/cedet-semantic-settings.el
-;; Time-stamp: <2010-11-30 11:42:06 Tuesday by taoshanwen>
+;; Time-stamp: <2015-04-29 15:39:18 Wednesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -19,11 +19,18 @@
 ;; write  to  the Free  Software  Foundation,  Inc., 51  Franklin
 ;; Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-;;(semantic-load-enable-excessive-code-helpers)
-;;(global-semantic-idle-completions-mode -1)
-;;(semantic-load-enable-semantic-debugging-helpers)
-;;(when window-system
- ;; (global-semantic-tag-folding-mode 1))
+(setq semantic-default-submodes
+      '(global-semantic-highlight-func-mode
+        global-semantic-decoration-mode
+        global-semantic-stickyfunc-mode
+        global-semantic-idle-scheduler-mode
+        global-semanticdb-minor-mode
+        global-semantic-idle-summary-mode
+        global-semantic-mru-bookmark-mode
+        global-semantic-highlight-edits-mode
+        global-semantic-show-unmatched-syntax-mode
+        global-semantic-show-parser-state-mode))
+(semantic-mode 1)
 
 (eal-define-keys-commonly
  global-map

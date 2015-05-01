@@ -3,7 +3,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: eval-after-load, autoload
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/eval-after-load.el
-;; Time-stamp: <2013-12-11 10:12:03 Wednesday by ahei>
+;; Time-stamp: <2015-01-23 16:09:04 Friday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -84,6 +84,7 @@
     "w3m"
     ("data-debug"      data-debug-mode)
     ("debug"           debugger-mode          debugger-mode-map)
+    ("conf-mode"       conf-mode              conf-mode-map)
     "text-mode"
     "color-theme"
     "woman"
