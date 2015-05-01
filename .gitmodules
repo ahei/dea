@@ -10,3 +10,12 @@
 [submodule "lisps/gnuplot-mode"]
 	path = lisps/gnuplot-mode
 	url = https://github.com/bruceravel/gnuplot-mode.git
+[submodule "lisps/muse"]
+	path = lisps/muse
+	url = git://repo.or.cz/muse-el.git
+[submodule "lisps/yaml-mode"]
+	path = lisps/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode
+[submodule "lisps/scala-mode2"]
+	path = lisps/scala-mode2
+	url = https://github.com/hvesalai/scala-mode2
