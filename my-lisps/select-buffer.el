@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*- 
 
-;; Time-stamp: <2012-08-15 14:40:18 Wednesday by ahei>
+;; Time-stamp: <2015-05-14 12:09:45 Thursday by ahei>
 
 ;;; selecte-buffer.el --- Select buffer like Alt-tab on linux system
 
@@ -378,6 +378,7 @@
     "org-sort"
     "org-ctrl-c-ctrl-c"
     "org-sparse-tree"
+    "imenu-and-refresh"
     "svn-status-resolved"
     "svn-status-revert"
     "svn-status-rm"

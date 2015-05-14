@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2014-02-27 19:18:04 Thursday by ahei>
+;; Time-stamp: <2015-05-14 12:16:17 Thursday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -178,9 +178,6 @@
 
 ;; 自动给你加上括号
 (require 'autopair-settings)
-
-;; 把Eclipse的功能带给Emacs
-(require 'eclim-settings)
 
 ;; 方便开发c/c++的配置
 (require 'c-settings)

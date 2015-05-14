@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/imenu-tree-settings.el
-;; Time-stamp: <2010-08-28 22:21:26 Saturday by taoshanwen>
+;; Time-stamp: <2015-05-14 12:11:20 Thursday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -20,6 +20,33 @@
 ;; Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 (require 'imenu-tree)
+
+(global-set-key (kbd "C-x M-i") 'imenu-tree)
+(global-set-key (kbd "C-x i") 'imenu-and-refresh-sb)
+
+(eal-define-keys
+   'imenu-tree-mode-map
+   `(("1"   delete-other-windows)
+     ("o"   other-window)
+     ("k"   tree-mode-previous-node)
+     ("j"   tree-mode-next-node)
+     ("n"   tree-mode-next-sib)
+     ("p"   tree-mode-previous-sib)
+     ("u"   View-scroll-half-page-backward)
+     ("w"   cua-scroll-down)
+     ("q"   quit-imenu-tree)))
+
+(defun quit-imenu-tree ()
+  (interactive)
+  (kill-this-buffer)
+  (call-interactively 'other-window)
+  (delete-other-windows))
+
+(defun imenu-and-refresh ()
+  (interactive)
+  (call-interactively 'imenu-tree)
+  (call-interactively 'quit-imenu-tree)
+  (call-interactively 'imenu))
 
 (defun imenu-tree-settings ()
   "Settings for `imenu-tree'."
