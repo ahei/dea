@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/imenu-tree-settings.el
-;; Time-stamp: <2015-05-14 12:11:20 Thursday by ahei>
+;; Time-stamp: <2015-05-14 14:50:08 Thursday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -22,7 +22,7 @@
 (require 'imenu-tree)
 
 (global-set-key (kbd "C-x M-i") 'imenu-tree)
-(global-set-key (kbd "C-x i") 'imenu-and-refresh-sb)
+(global-set-key (kbd "C-x i") 'imenu-and-refresh)
 
 (eal-define-keys
    'imenu-tree-mode-map
@@ -34,6 +34,7 @@
      ("p"   tree-mode-previous-sib)
      ("u"   View-scroll-half-page-backward)
      ("w"   cua-scroll-down)
+     ("'"   switch-to-other-buffer)
      ("q"   quit-imenu-tree)))
 
 (defun quit-imenu-tree ()
@@ -44,8 +45,9 @@
 
 (defun imenu-and-refresh ()
   (interactive)
-  (call-interactively 'imenu-tree)
-  (call-interactively 'quit-imenu-tree)
+  (save-window-excursion
+    (call-interactively 'imenu-tree)
+    (call-interactively 'quit-imenu-tree))
   (call-interactively 'imenu))
 
 (defun imenu-tree-settings ()
