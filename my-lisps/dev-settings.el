@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2015-05-14 12:16:17 Thursday by ahei>
+;; Time-stamp: <2015-05-14 12:17:11 Thursday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -206,8 +206,6 @@
                  imenu-tree-settings
                  ;; 高亮引用的函数和变量
                  zjl-hl-settings
-                 ;; 把speedbar放到当前frame里面
-                 sr-speedbar-settings
                  codepilot-settings
                  perl-settings
                  ;; 实现程序变量的自动对齐
@@ -223,5 +221,8 @@
                  git-emacs-settings
                  thrift-mode-settings
                  scala-mode2-settings))
+
+;; 把speedbar放到当前frame里面
+(if (equal window-system 'w32) (require 'sr-speedbar-settings))
 
 (provide 'dev-settings)

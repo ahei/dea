@@ -28,6 +28,10 @@
 ;; 一些Emacs的小设置
 (require 'misc-settings)
 
+;; 24.4已经去掉了这个函数,但是有些包还使用了它,所以定义下
+(defun ad-advised-definition-p (definition)
+	nil)
+
 ;; 编码设置
 (require 'coding-settings)
 

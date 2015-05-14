@@ -1,10 +1,11 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2011-02-18 14:29:30 Friday by taoshanwen>
+;; Time-stamp: <2015-05-02 15:26:58 Saturday by ahei>
 
 (require 'eval-after-load)
 
 (defvar mswin  (equal window-system 'w32)  "Non-nil means windows system.")
+(defvar mac    (equal window-system 'ns)   "Non-nil means mac os system.")
 (defvar cygwin (equal system-type 'cygwin) "Non-nil means cygwin system.")
 
 (defvar use-cua nil "Use CUA mode or not.")
