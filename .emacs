@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2014-01-26 11:57:39 Sunday by ahei>
+;; Time-stamp: <2015-05-02 21:15:29 Saturday by ahei>
 
 (defconst my-emacs-path           "~/emacs/" "我的emacs相关配置文件的路径")
 (defconst my-emacs-my-lisps-path  (concat my-emacs-path "my-lisps/") "我自己写的emacs lisp包的路径")
@@ -31,6 +31,8 @@
 ;; 24.4已经去掉了这个函数,但是有些包还使用了它,所以定义下
 (defun ad-advised-definition-p (definition)
 	nil)
+
+(require 'package-settings)
 
 ;; 编码设置
 (require 'coding-settings)
