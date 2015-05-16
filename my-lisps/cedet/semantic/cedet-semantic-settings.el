@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/cedet-semantic-settings.el
-;; Time-stamp: <2015-04-29 15:39:18 Wednesday by ahei>
+;; Time-stamp: <2015-05-14 10:42:35 Thursday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -40,8 +40,8 @@
   "Settings for `semantic'."
   (eal-define-keys
    `(c-mode-base-map makefile-gmake-mode-map python-mode-map perl-mode-map sh-mode-map)
-   `(("C-c C-j" semantic-ia-fast-jump)
-     ("C-c j"   semantic-complete-jump-local)
+   `(("C-c C-j" semantic-complete-jump-local)
+     ("C-c j"   semantic-complete-jump)
      ("C-c n"   senator-next-tag)
      ("C-c p"   senator-previous-tag)
      ("C-c M-m" semantic-goto-local-main)
