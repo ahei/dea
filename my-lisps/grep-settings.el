@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2010-12-01 19:27:22 Wednesday by taoshanwen>
+;; Time-stamp: <2015-05-02 21:40:33 Saturday by ahei>
 
 (unless is-before-emacs-21
   (eal-define-keys-commonly
@@ -39,7 +39,7 @@ SYMBOL should be one of `grep-command', `grep-template',
 (defun find-grep-in-dir (dir)
   "Run `find-grep' in directory DIR."
   (interactive (list (read-directory-name "Directory to find in: " default-directory "" t)))
-  (let ((prompt (concat "find " dir " -type f ! -path \"*/.svn*\" ! -path \"*~\" -print0 | xargs -0 -e grep -nH -e ")))
+  (let ((prompt (concat "find " dir " -type f ! -path \"*/.svn*\" ! -path \"*~\" -print0 | xargs -0 grep -nH -e ")))
     (set-grep-command prompt)
     (call-interactively 'find-grep)))
 
