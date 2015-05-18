@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/git-emacs-settings.el
-;; Time-stamp: <2013-12-16 19:57:38 Monday by ahei>
+;; Time-stamp: <2015-05-15 09:50:53 Friday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -21,6 +21,10 @@
 
 (require 'git-emacs)
 
+(eal-define-keys
+ 'global-map
+ `(("C-x M-g" git-status)))
+
 (defun git-emacs-settings ()
   "Settings for `git-emacs'."
 
@@ -37,6 +41,7 @@
      ("e"   git--diff-buffer-map)
      ("1"   delete-other-windows)
      ("SPC" View-scroll-page-forward)
+     ("u"   View-scroll-half-page-backward)
      ("c"   git-commit-all)
      ("o"   other-window)
      ("'"   switch-to-other-buffer)))
