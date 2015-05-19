@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/git-emacs-settings.el
-;; Time-stamp: <2015-05-15 09:50:53 Friday by ahei>
+;; Time-stamp: <2015-05-19 14:53:52 Tuesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -21,12 +21,26 @@
 
 (require 'git-emacs)
 
-(eal-define-keys
- 'global-map
- `(("C-x M-g" git-status)))
-
 (defun git-emacs-settings ()
   "Settings for `git-emacs'."
+
+  (apply-args-list-to-fun
+   `(def-execute-command-on-file-command
+      def-execute-command-on-current-file-command
+      def-execute-command-on-current-dir-command)
+   `("git checkout --"))
+
+  (defun git-revert ()
+    (interactive)
+    (save-window-excursion
+      (call-interactively 'git--status-view-open-or-expand)
+      (call-interactively 'git-checkout----current-file))
+    (call-interactively 'git--status-view-refresh))
+
+  (eal-define-keys
+   'global-map
+   `(("C-x M-g" git-status)
+     ("C-x M-d" git-diff-head)))
 
   (eal-define-keys
    'git-status-mode-map
@@ -38,11 +52,15 @@
      ("j"   git--status-view-next-line)
      ("n"   git--status-view-next-meaningful-line)
      ("p"   git--status-view-prev-meaningful-line)
-     ("e"   git--diff-buffer-map)
+     ("e"   git-diff-head)
+     ("E"   git--diff-buffer-map)
      ("1"   delete-other-windows)
      ("SPC" View-scroll-page-forward)
      ("u"   View-scroll-half-page-backward)
      ("c"   git-commit-all)
+     ("r"   git-revert)
+     ("C-k" git--status-view-rm)
+     ("t"   sb-toggle-keep-buffer)
      ("o"   other-window)
      ("'"   switch-to-other-buffer)))
 

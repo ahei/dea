@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*- 
 
-;; Time-stamp: <2015-05-14 12:32:57 Thursday by ahei>
+;; Time-stamp: <2015-05-19 15:06:41 Tuesday by ahei>
 
 ;;; selecte-buffer.el --- Select buffer like Alt-tab on linux system
 
@@ -282,15 +282,16 @@
 (sb-update)
 
 ;; TODO: 怎样可以不要以下的小patch
-(require 'ediff)
+(defun sb-settings-4-ediff ()
+  (defvar sb-state-ediff nil "select-buffer的状态")
 
-(defvar sb-state-ediff nil "select-buffer的状态")
-
-(add-hook 'ediff-startup-hook
-          '(lambda ()
-             (setq sb-state-ediff sb-keep-buffer)
-             (sb-keep-buffer nil)))
-(add-hook 'ediff-quit-hook '(lambda () (sb-keep-buffer sb-state-ediff)))
+  (add-hook 'ediff-startup-hook
+            '(lambda ()
+               (setq sb-state-ediff sb-keep-buffer)
+               (sb-keep-buffer nil)))
+  (add-hook 'ediff-quit-hook '(lambda () (sb-keep-buffer sb-state-ediff))))
+(eval-after-load "ediff"
+  `(sb-settings-4-ediff))
 
 (defvar command-with-sb
   '(kill-buffer
