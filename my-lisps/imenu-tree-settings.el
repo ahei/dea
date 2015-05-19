@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/imenu-tree-settings.el
-;; Time-stamp: <2015-05-19 14:56:47 Tuesday by ahei>
+;; Time-stamp: <2015-05-19 15:09:18 Tuesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -82,6 +82,9 @@
   "cedet `semantic' settings for `emaci'."  
   (emaci-add-key-definition
    "i" 'imenu-and-refresh
+   '(memq major-mode dev-modes))
+  (emaci-add-key-definition
+   "M" 'imenu-goto-main
    '(memq major-mode dev-modes)))
 
 (eval-after-load "emaci"
@@ -89,6 +92,7 @@
 
 (eal-define-keys
  'emaci-mode-map
- `(("i" emaci-i)))
+ `(("i" emaci-i)
+   ("M" emaci-M)))
 
 (provide 'imenu-tree-settings)
