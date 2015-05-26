@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/git-emacs-settings.el
-;; Time-stamp: <2015-05-19 14:53:52 Tuesday by ahei>
+;; Time-stamp: <2015-05-26 15:06:02 Tuesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -30,6 +30,10 @@
       def-execute-command-on-current-dir-command)
    `("git checkout --"))
 
+  (defun push-ahei ()
+    (interactive)
+    (shell-command "git checkout ahei && git push origin ahei"))
+  
   (defun git-revert ()
     (interactive)
     (save-window-excursion
@@ -60,6 +64,7 @@
      ("c"   git-commit-all)
      ("r"   git-revert)
      ("C-k" git--status-view-rm)
+     ("P"   push-ahei)
      ("t"   sb-toggle-keep-buffer)
      ("o"   other-window)
      ("'"   switch-to-other-buffer)))
