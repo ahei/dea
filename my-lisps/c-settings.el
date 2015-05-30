@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2010-08-29 18:34:06 Sunday by taoshanwen>
+;; Time-stamp: <2015-05-21 17:20:40 Thursday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -25,10 +25,10 @@
 
 (eal-define-keys
  `(c-mode-base-map)
- `(("C-h"     c-electric-backspace)
-   ("C-c M-a" beginning-of-defun)
-   ("C-c M-e" end-of-defun)
-   ("C-c M-F" copy-current-fun-name)))
+ `(("C-h" c-electric-backspace)
+   ("M-a" beginning-of-defun)
+   ("M-e" end-of-defun)
+   ("M-F" copy-current-fun-name)))
 
 (defun cc-mode-settings ()
   "Settings for `cc-mode'."

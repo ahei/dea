@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2015-05-02 15:26:58 Saturday by ahei>
+;; Time-stamp: <2015-05-21 11:13:30 Thursday by ahei>
 
 (require 'eval-after-load)
 
@@ -22,7 +22,7 @@
 (defconst is-after-emacs-23  (>= emacs-major-version 23) "是否是emacs 23或以后的版本")
 (defconst is-after-emacs-24  (>= emacs-major-version 24) "是否是emacs 24或以后的版本")
 
-(defvar c-modes '(c-mode c++-mode awk-mode java-mode) "*C modes.")
+(defvar c-modes '(c-mode c++-mode awk-mode java-mode php-mode) "*C modes.")
 (defvar dev-modes (append c-modes '(python-mode perl-mode makefile-gmake-mode)) "*Modes for develop.")
 
 (defvar makefile-mode-map-list nil "the list of `makefile-mode-map'")
