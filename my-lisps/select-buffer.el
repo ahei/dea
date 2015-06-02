@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*- 
 
-;; Time-stamp: <2015-05-19 15:06:41 Tuesday by ahei>
+;; Time-stamp: <2015-05-29 17:32:20 Friday by ahei>
 
 ;;; selecte-buffer.el --- Select buffer like Alt-tab on linux system
 
@@ -46,8 +46,8 @@
 
 (apply-define-key
  global-map
- `(("M-N"   select-buffer-forward)
-   ("M-P"   select-buffer-backward)
+ `(("M-n"   select-buffer-forward)
+   ("M-p"   select-buffer-backward)
    ("C-x t" sb-toggle-keep-buffer)
    ("M-'"   switch-to-other-buffer)))
 

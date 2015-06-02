@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/git-emacs-settings.el
-;; Time-stamp: <2015-05-26 15:06:02 Tuesday by ahei>
+;; Time-stamp: <2015-05-29 20:06:38 Friday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -30,9 +30,21 @@
       def-execute-command-on-current-dir-command)
    `("git checkout --"))
 
-  (defun push-ahei ()
+  (defun git-push-current ()
     (interactive)
-    (shell-command "git checkout ahei && git push origin ahei"))
+    (shell-command "git push origin $(git branch | fgrep '*' | cut -d ' ' -f2)"))
+
+  (defun git-pull ()
+    (interactive)
+    (shell-command "git pull origin $(git branch | fgrep '*' | cut -d ' ' -f2)"))
+
+  (defun git-merge-master ()
+    (interactive)
+    (shell-command "branch=$(git branch | fgrep '*' | cut -d ' ' -f2) && git checkout master && git pull && git checkout $branch && git merge master"))
+  
+  (defun git-merge-to-master-and-push ()
+    (interactive)
+    (shell-command "branch=$(git branch | fgrep '*' | cut -d ' ' -f2) && git checkout master && git merge $branch && git push origin master && git checkout $branch"))
   
   (defun git-revert ()
     (interactive)
@@ -64,7 +76,10 @@
      ("c"   git-commit-all)
      ("r"   git-revert)
      ("C-k" git--status-view-rm)
-     ("P"   push-ahei)
+     ("P"   git-push-current)
+     ("L"   git-pull)
+     ("M"   git-merge-master)
+     ("M-m" git-merge-to-master-and-push)
      ("t"   sb-toggle-keep-buffer)
      ("o"   other-window)
      ("'"   switch-to-other-buffer)))

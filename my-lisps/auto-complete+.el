@@ -71,7 +71,7 @@
                     xml-mode sgml-mode html-mode fundamental-mode
                     org-mode svn-log-edit-mode text-mode
                     autoconf-mode makefile-automake-mode makefile-gmake-mode
-                    conf-javaprop-mode conf-unix-mode change-log-mode
+                    conf-javaprop-mode conf-unix-mode conf-space-mode change-log-mode
                     tcl-mode awk-mode latex-mode rst-mode nxml-mode lua-mode
                     graphviz-dot-mode sql-mode lua-mode rst-mode protobuf-mode erlang-mode
                     markdown-mode scala-mode thrift-mode)

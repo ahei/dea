@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2015-05-02 21:40:33 Saturday by ahei>
+;; Time-stamp: <2015-05-29 17:35:25 Friday by ahei>
 
 (unless is-before-emacs-21
   (eal-define-keys-commonly
@@ -26,6 +26,10 @@
      ("t"     sb-toggle-keep-buffer)
      ("N"     select-buffer-forward)
      ("P"     select-buffer-backward)
+     ("M-N"   compilation-next-error)
+     ("M-P"   compilation-previous-error)
+     ("M-n"   nil)
+     ("M-p"   nil)
      ("L"     count-brf-lines))))
 
 (autoload 'grep-apply-setting "grep"

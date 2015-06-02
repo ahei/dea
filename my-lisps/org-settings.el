@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/org-settings.el
-;; Time-stamp: <2012-08-15 14:40:37 Wednesday by ahei>
+;; Time-stamp: <2015-05-29 17:29:54 Friday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -160,8 +160,6 @@
    ("C-c p"    org-backward-same-level)
    ("C-c M-l"  org-shiftright)
    ("C-c ,"    org-priority-sb)
-   ("M-n"      org-metadown)
-   ("M-p"      org-metaup)
    ("C-c ^"    org-sort-sb)
    ("C-c /"    org-sparse-tree-sb)
    ("C-c C-c"  org-ctrl-c-ctrl-c-sb)

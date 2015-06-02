@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2012-06-09 21:28:52 Saturday by ahei>
+;; Time-stamp: <2015-05-29 17:37:40 Friday by ahei>
 
 (require 'util)
 
@@ -31,8 +31,8 @@
 
 (eal-define-keys-commonly
  global-map
- `(("M-n" next-error)
-   ("M-p" previous-error)))
+ `(("M-N" next-error)
+   ("M-P" previous-error)))
 
 (defun compile-settings ()
   "Settings for `compile'."
@@ -41,8 +41,10 @@
 
   (eal-define-keys
    makefile-mode-map-list
-   `(("M-p"	  previous-error)
-     ("M-n"	  next-error)
+   `(("M-P"	  previous-error)
+     ("M-N"	  next-error)
+     ("M-n"   nil)
+     ("M-p"   nil)
      ("C-c p" makefile-previous-dependency)
      ("C-c n" makefile-next-dependency)))
 
@@ -50,14 +52,16 @@
 
 (eal-define-keys
  'compilation-mode-map
- `(("n" compilation-next-error)
-   ("p" compilation-previous-error)
-   ("'" switch-to-other-buffer)
-   ("u" View-scroll-half-page-backward)
-   ("f" am-forward-word-or-to-word)
-   ("d" scroll-up)
-   ("v" set-mark-command)
-   ("w" scroll-down)))
+ `(("n"     compilation-next-error)
+   ("p"     compilation-previous-error)
+   ("'"     switch-to-other-buffer)
+   ("u"     View-scroll-half-page-backward)
+   ("f"     am-forward-word-or-to-word)
+   ("d"     scroll-up)
+   ("v"     set-mark-command)
+   ("M-n"   nil)
+   ("M-p"   nil)
+   ("w"     scroll-down)))
 
 (eval-after-load "compile"
   '(compile-settings))

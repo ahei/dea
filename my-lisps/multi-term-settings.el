@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2011-02-15 22:38:14 Tuesday by taoshanwen>
+;; Time-stamp: <2015-05-29 17:30:14 Friday by ahei>
 
 (require 'multi-term)
 
@@ -84,8 +84,8 @@
    ("M-b"   . term-send-raw-meta)
    ("M-d"   . term-send-raw-meta)
    ("M-K"   . term-send-kill-line)
-   ("M-p"   . previous-line)
-   ("M-n"   . next-line)
+   ("M-P"   . previous-line)
+   ("M-N"   . next-line)
    ("M-u"   . term-send-raw-meta)
    ("M-w"   . term-send-copy-line)
    ("M-W"   . term-send-copy-line-left)

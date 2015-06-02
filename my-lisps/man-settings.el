@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2013-12-13 09:41:37 Friday by ahei>
+;; Time-stamp: <2015-06-01 18:35:41 Monday by ahei>
 
 (define-key global-map (kbd "C-x M") 'woman)
 
@@ -24,6 +24,7 @@
    ("P"     Man-previous-section)
    ("m"     back-to-indentation)
    ("M-j"   Man-goto-section)
+   ("M-n"   nil)
    ("."     set-mark-command)
    ("c"     go-to-char-forward-sb)
    ("g"     emaci-g)
