@@ -1,6 +1,6 @@
 # -*- org -*-
 
-# Time-stamp: <2012-04-18 19:01:07 Wednesday by taoshanwen>
+# Time-stamp: <2015-06-11 10:38:47 Thursday by ahei>
 
 #+OPTIONS: ^:nil author:nil timestamp:nil creator:nil
 #+INFOJS_OPT: view:info toc:nil path:org-info.js
@@ -137,7 +137,10 @@ Linux下文本的高效处理
 **** -F, --fixed-strings
      把pattern当作一个固定的字符串, 不进行正则解析. 当你要搜索非正则的固定字符串时(还可能含有正则元字符), 这个选项会非常有用, 而且由于不需要解析正则, 速度会快些.
 **** -P, --perl-regexp
-     把pattern解析为perl的正则(PCRE), 由于perl的正则强大而简洁, 所以可以多尝试着使用这个选项.
+     把pattern解析为perl的正则(PCRE), 由于perl的正则强大而简洁, 所以可以多尝试着使用这个选项. 比如下面的功能只有用perl的正则才能搞定：
+     #+BEGIN_SRC sh
+     echo "c=111" | /bin/grep -P '(?<=c=)([0-9]+)' -o
+     #+END_SRC
      
 **** -i, --ignore-case
      搜索pattern的时候, 忽略大小写. 如果没有这个选项, 可以使用PCRE, 比如:

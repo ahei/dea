@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2010-12-26 20:41:26 Sunday by taoshanwen>
+;; Time-stamp: <2015-06-02 15:34:10 Tuesday by ahei>
 
 (defun woman-settings ()
   "Settings for `woman-mode'."
@@ -20,6 +20,7 @@
 (eal-define-keys
  'woman-mode-map
  `(("t"     sb-toggle-keep-buffer)
+   ("M-n"   nil)
    ("w"     scroll-down)
    ("v"     set-mark-command)))
 

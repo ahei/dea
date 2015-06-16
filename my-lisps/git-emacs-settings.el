@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/git-emacs-settings.el
-;; Time-stamp: <2015-05-29 20:06:38 Friday by ahei>
+;; Time-stamp: <2015-06-16 11:46:07 Tuesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -44,7 +44,7 @@
   
   (defun git-merge-to-master-and-push ()
     (interactive)
-    (shell-command "branch=$(git branch | fgrep '*' | cut -d ' ' -f2) && git checkout master && git merge $branch && git push origin master && git checkout $branch"))
+    (shell-command "branch=$(git branch | fgrep '*' | cut -d ' ' -f2) && git checkout master && git merge $branch && git push origin master; git checkout $branch"))
   
   (defun git-revert ()
     (interactive)
@@ -92,6 +92,7 @@
      ("SPC" View-scroll-page-forward)
      ("o"   other-window)
      ("G"   end-of-buffer)
+     ("M-n" nil)
      ("1"   delete-other-windows)
      ("'"   switch-to-other-buffer)
      ("q"   delete-current-window)
