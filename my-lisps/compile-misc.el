@@ -3,7 +3,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: 
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/compile-settings-autoloads.el
-;; Time-stamp: <2013-05-23 16:59:52 Thursday by ahei>
+;; Time-stamp: <2015-06-24 10:27:08 Wednesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -46,7 +46,7 @@
       (let ((extension (file-name-extension file)))
         (cond
          ((equal extension "cpp")
-          (compile (format "g++ -g %s -o %s" file (file-name-sans-extension base-name))))
+          (compile (format "g++ -g -std=c++11 %s -o %s" file (file-name-sans-extension base-name))))
          ((equal (downcase extension) "c")
           (compile (format "gcc -g %s -o %s" file (file-name-sans-extension base-name))))
          ((equal extension "java")

@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
 
-// Time-stamp: <2012-07-21 17:34:32 Saturday by ahei>
+// Time-stamp: <2015-07-31 15:05:07 Friday by ahei>
 
 /**
  * @file (>>>FILE<<<)
@@ -14,6 +14,7 @@
 using namespace std;
 
 static void usage(int code = 1);
+static void shift(int & argc, char ** & argv, int offset);
 
 int main(int argc, char * argv[])
 {
@@ -47,12 +48,10 @@ int main(int argc, char * argv[])
         }
     }
 
-    argv[optind-1] = argv[0];
-    argv += optind-1;
-    argc -= optind-1;
+    shift(argc, argv, optind - 1);
 
     // other non-option arguments
-    for (int i = optind; i < argc; i++)
+    for (int i = 1; i < argc; i++)
     {
         std::cout << argv[i] << endl;
     }
@@ -83,8 +82,15 @@ void usage(int code /* = 1 */)
     *os << "\t\tOutput this help." << endl;
     *os << endl;
 
-    *os << "Version: " VERSION << endl;
+    *os << "Version: " PROGRAM_VERSION << endl;
     *os << "Last Make: " << __DATE__ << " " << __TIME__ << "." << endl;
 
     exit(code);
+}
+
+void shift(int & argc, char ** & argv, int offset)
+{
+    argv[offset] = argv[0];
+    argv += offset;
+    argc -= offset;
 }

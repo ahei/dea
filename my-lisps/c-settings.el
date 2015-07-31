@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2015-05-21 17:20:40 Thursday by ahei>
+;; Time-stamp: <2015-07-08 14:28:42 Wednesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -27,8 +27,7 @@
  `(c-mode-base-map)
  `(("C-h" c-electric-backspace)
    ("M-a" beginning-of-defun)
-   ("M-e" end-of-defun)
-   ("M-F" copy-current-fun-name)))
+   ("M-e" end-of-defun)))
 
 (defun cc-mode-settings ()
   "Settings for `cc-mode'."

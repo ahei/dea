@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2011-03-20 23:26:43 Sunday by taoshanwen>
+;; Time-stamp: <2015-06-24 16:57:02 Wednesday by ahei>
 
 (require 'util)
 
@@ -23,6 +23,7 @@
      ("M-j"   gud-next)
      ("M-k"   gud-step)
      ("M-c"   gud-cont)
+     ("M-n"   select-buffer-forward)
      ("M-C"   capitalize-word)
      ("C-c m" make)))
 

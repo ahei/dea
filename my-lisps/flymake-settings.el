@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/flymake-settings.el
-;; Time-stamp: <2012-10-09 22:56:41 Tuesday by ahei>
+;; Time-stamp: <2015-06-24 10:24:27 Wednesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -50,6 +50,7 @@
                     "/dev/null"
                     "-fsyntax-only"
                     "-Wall"
+                    "-std=c++11"
                     source)))))
 
   (defun flymake-simple-make-gcc-init-impl (create-temp-f use-relative-base-dir use-relative-source build-file-name get-cmdline-f)

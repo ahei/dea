@@ -1,10 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-<<<<<<< HEAD
-;; Time-stamp: <2015-05-29 17:35:25 Friday by ahei>
-=======
 ;; Time-stamp: <2015-05-24 16:06:06 Sunday by ahei>
->>>>>>> 6473e6fb5b03b2dd1f1532fb1d196da0bc559ff8
 
 (unless is-before-emacs-21
   (eal-define-keys-commonly

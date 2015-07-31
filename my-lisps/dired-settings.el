@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/dired-settings.el
-;; Time-stamp: <2010-11-21 21:15:20 Sunday by taoshanwen>
+;; Time-stamp: <2015-07-23 11:52:27 Thursday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -245,7 +245,7 @@ which is options for `diff'."
        ("t"           sb-toggle-keep-buffer)
        ("M-m"         dired-unmark-backward)
        ("C-c M-m"     dired-create-directory)
-       
+       ("M-p"         nil)
        ("C-c C-m"     make-sb)
        ("C-c m"       make-check-sb)
        ("C-c M"       make-clean-sb)

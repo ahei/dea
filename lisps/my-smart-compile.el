@@ -53,7 +53,7 @@
   (octave-mode        . (run-octave))
   ("\\.c\\'"          . "gcc -g %f -lm -o %n")
 ;;  ("\\.c\\'"          . "gcc -O2 %f -lm -o %n && ./%n")
-  ("\\.[Cc]+[Pp]*\\'" . "g++ -g %f -lm -o %n")
+  ("\\.[Cc]+[Pp]*\\'" . "g++ -g -std=c++11 %f -lm -o %n")
   ("\\.m\\'"          . "gcc -O2 %f -lobjc -lpthread -o %n")
   ("\\.java\\'"       . "javac %f")
   ("\\.php\\'"        . "php -l %f")
