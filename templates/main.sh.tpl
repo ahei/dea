@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Time-stamp: <2013-12-19 17:22:41 Thursday by ahei>
+# Time-stamp: <2015-08-17 11:19:20 Monday by ahei>
 
 # @file (>>>FILE<<<)
 # @version 1.0
@@ -37,9 +37,9 @@ EOF
     exit "$code"
 }
 
-optInd=1
-
-while getopts ":hv" OPT; do
+options=":hv"
+eval set -- $(getopt -o "$options" -- "$@")
+while getopts "$options" OPT; do
     case "$OPT" in
         v)
             version
@@ -64,6 +64,6 @@ while getopts ":hv" OPT; do
     esac
 done
 
-shift $((optInd - 1))
+shift $((OPTIND - 1))
 
 (>>>POINT<<<)
