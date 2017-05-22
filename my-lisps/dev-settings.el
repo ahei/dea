@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2017-05-22 15:21:44 Monday by ahei>
+;; Time-stamp: <2017-05-22 15:38:47 Monday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -221,7 +221,8 @@
                  git-emacs-settings
                  thrift-mode-settings
                  scala-mode2-settings
-                 cmake-settings))
+                 cmake-settings
+                 go-mode-settings))
 
 ;; 把speedbar放到当前frame里面
 (if (equal window-system 'w32) (require 'sr-speedbar-settings))
