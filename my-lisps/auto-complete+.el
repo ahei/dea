@@ -74,7 +74,7 @@
                     conf-javaprop-mode conf-unix-mode conf-space-mode change-log-mode
                     tcl-mode awk-mode latex-mode rst-mode nxml-mode lua-mode
                     graphviz-dot-mode sql-mode lua-mode rst-mode protobuf-mode erlang-mode
-                    markdown-mode scala-mode thrift-mode)
+                    markdown-mode scala-mode thrift-mode cmake-mode)
   "Major modes function `auto-complete-mode' can run on."
   :type '(list symbol)
   :group 'auto-complete+)

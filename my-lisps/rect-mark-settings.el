@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2013-11-22 15:43:48 Friday by ahei>
+;; Time-stamp: <2016-06-06 11:30:02 Monday by ahei>
 
 (eal-define-keys-commonly
  global-map
@@ -26,7 +26,7 @@
   (if cua-mode
       (if cua--rectangle
           (progn
-            (cua-copy-rectangle t)
+            (cua-copy-region t)
             (cua-cancel))
         (call-interactively 'cua-copy-region))
     (if (rm-mark-active) (call-interactively 'rm-kill-ring-save) (kill-ring-save beg end))))

@@ -116,7 +116,7 @@
 (require 'hl-line-settings)
 
 ;; 字体配置
-(require 'font-settings)
+;; (require 'font-settings)
 
 ;; diff
 (require 'diff-settings)

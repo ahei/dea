@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2015-05-06 15:56:37 Wednesday by ahei>
+;; Time-stamp: <2016-04-29 09:28:46 Friday by ahei>
 
 (require 'compile-settings)
 (require 'edit-misc)
@@ -55,7 +55,7 @@ and `transient-mark-mode'." t)
                     conf-javaprop-mode-map html-mode-map tcl-mode-map
                     autoconf-mode-map perl-mode-map nxml-mode-map
                     python-mode-map graphviz-dot-mode-map lua-mode-map
-                    rst-mode-map conf-space-mode-map))
+                    rst-mode-map conf-space-mode-map cmake-mode-map))
  `(("C-c C-c" comment)))
 
 ;;;###autoload

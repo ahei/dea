@@ -16,3 +16,6 @@
 [submodule "lisps/scala-mode2"]
 	path = lisps/scala-mode2
 	url = https://github.com/hvesalai/scala-mode2
+[submodule "lisps/cmake-ide"]
+	path = lisps/cmake-ide
+	url = https://github.com/atilaneves/cmake-ide

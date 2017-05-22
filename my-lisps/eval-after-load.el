@@ -117,6 +117,7 @@
     "ezbl"
     "markdown-mode"
     "rst"
+    "cmake-mode"
     "graphviz-dot-mode"
     ("speedbar"        speedbar-mode          speedbar-key-map)
     ("speedbar"        speedbar-mode          speedbar-file-key-map)

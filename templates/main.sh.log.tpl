@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Time-stamp: <2014-01-21 11:19:31 Tuesday by ahei>
+# Time-stamp: <2016-06-23 18:38:50 Thursday by ahei>
 
 # @file (>>>FILE<<<)
 # @version 1.0
@@ -42,13 +42,12 @@ EOF
 isExecute=1
 isStop=1
 
-optInd=1
-
-while getopts ":D:hv" OPT; do
+options=":hv"
+eval set -- $(getopt -o "$options" -- "$@")
+while getopts "$options" OPT; do
     case "$OPT" in
         D)
             level="$OPTARG"
-            let optInd+=2
             ;;
 
         v)
@@ -79,7 +78,7 @@ while getopts ":D:hv" OPT; do
     esac
 done
 
-shift $((optInd - 1))
+shift $((OPTIND - 1))
 
 LOG4SH_CONFIGURATION="$home/../conf/log4sh.properties" . "$home/../shell/log4sh"
 

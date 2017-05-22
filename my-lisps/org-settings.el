@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/org-settings.el
-;; Time-stamp: <2015-05-29 17:29:54 Friday by ahei>
+;; Time-stamp: <2016-04-22 16:09:06 Friday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -143,9 +143,7 @@
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
   
   (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate)
-
-  (org-remember-insinuate))
+  (org-clock-persistence-insinuate))
 
 (eal-define-keys
  'org-mode-map

@@ -3,7 +3,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: 
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/edit-misc.el
-;; Time-stamp: <2013-11-22 15:43:30 Friday by ahei>
+;; Time-stamp: <2016-04-27 10:07:29 Wednesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -44,7 +44,7 @@
     (if mark-active
         (if cua--rectangle
             (progn
-              (cua-cut-rectangle t)
+              (cua-cut-rectangle-as-text t)
               (cua-cancel))
           (call-interactively 'kill-region))
       (call-interactively 'backward-kill-word))))

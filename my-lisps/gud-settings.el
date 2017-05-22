@@ -1,14 +1,15 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2015-06-24 16:57:02 Wednesday by ahei>
+;; Time-stamp: <2016-05-03 15:13:27 Tuesday by ahei>
 
 (require 'util)
 
 (eal-define-keys
  'c-mode-base-map
- `(("C-c g" gdb)
-   ("C-c b" gud-break)
-   ("C-c B" gud-remove)))
+ `(("C-c g"   gdb)
+   ("C-c b"   gud-break)
+   ("C-x SPC" gud-break)
+   ("C-c B"   gud-remove)))
 
 (defun gud-settings ()
   "Settings for `gud'."

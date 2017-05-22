@@ -1,6 +1,6 @@
 /* -*- C++ -*- */
 
-// Time-stamp: <2012-05-23 20:39:24 Wednesday by ahei>
+// Time-stamp: <2016-06-27 11:30:08 Monday by ahei>
 
 /**
  * @file (>>>FILE<<<)
@@ -16,9 +16,9 @@
 using namespace std;
 using namespace log4cxx;
 
-static void usage(int code = 1);
+static void usage(char * argv[], int code = 1);
 
-static LoggerPtr logger = Logger::getLogger("");
+LoggerPtr logger = Logger::getLogger("");
 
 int main(int argc, char * argv[])
 {
@@ -36,18 +36,18 @@ int main(int argc, char * argv[])
         switch(opt)
         {
         case 'h':
-            usage(0);
+            usage(argv, 0);
             break;
 
         case ':':
             arg = argv[optind-1];
-            LOG4CXX_ERROR(logger, std::string("Option `")+arg+"' need argument.\n");
-            usage();
+            std::cerr << "Option `" << arg << "' need argument.\n";
+            usage(argv);
             break;
 
         case '?':
-            LOG4CXX_WARN(logger, std::string("Invalid option `")+argv[optind-1]+"'.\n");
-            usage();
+            std::cerr << "Invalid option `" << argv[optind-1] << "'.\n";
+            usage(argv);
             break;
         }
     }
@@ -61,7 +61,7 @@ int main(int argc, char * argv[])
     return 0;
 }
 
-void usage(int code /* = 1 */)
+void usage(char * argv[], int code /* = 1 */)
 {
     std::ostream * os = NULL;
 
@@ -75,7 +75,7 @@ void usage(int code /* = 1 */)
     }
 
     *os << "usage: "
-        << PROGRAM_NAME << " [OPTIONS]\n" << std::endl;
+        << argv[0] << " [OPTIONS]\n" << std::endl;
 
     *os << "This program .\n" << std::endl;
 
