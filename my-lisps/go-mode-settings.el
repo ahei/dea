@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/go-mode-settings.el
-;; Time-stamp: <2017-05-22 15:39:12 Monday by ahei>
+;; Time-stamp: <2017-09-01 09:59:01 Friday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -22,7 +22,35 @@
 (require 'go-mode)
 
 (defun go-mode-settings ()
-  "Settings for `go-mode'.")
+  "Settings for `go-mode'."
+
+  (defun make-go ()
+    (interactive)
+    (if (or (file-readable-p "Makefile") (file-readable-p "makefile") (file-readable-p "GNUmakefile"))
+        (compile "make -k")
+      (compile-buffer-sb)))
+
+  (defun make-check-go ()
+    (interactive)
+    (if (or (file-readable-p "Makefile") (file-readable-p "makefile") (file-readable-p "GNUmakefile"))
+        (compile "make -k check")
+      (compile "go test -v ./...")))
+
+  (eal-define-keys
+   'go-mode-map
+   `(("C-c C-m" make-go)
+     ("C-c m"   make-check-go)
+     ("M-a"     beginning-of-defun)
+     ("M-e"     end-of-defun)))
+
+  (add-hook 'before-save-hook
+            (lambda ()
+              (interactive)
+              (when (eq major-mode 'go-mode)
+                (setq gofmt-command "gofmt")
+                (gofmt)
+                (setq gofmt-command "goimports")
+                (gofmt)))))
 
 (eval-after-load "go-mode"
   `(go-mode-settings))

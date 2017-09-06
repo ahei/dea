@@ -1,12 +1,12 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2011-06-29 19:22:36 Wednesday by taoshanwen>
+;; Time-stamp: <2017-07-03 15:00:39 Monday by ahei>
 
 (require 'template)
 
 (eal-define-keys
  '(emacs-lisp-mode-map c-mode-base-map makefile-mode-map makefile-automake-mode-map
-                       sh-mode-map text-mode-map python-mode-map py-mode-map)
+                       sh-mode-map text-mode-map python-mode-map py-mode-map go-mode-map)
  `(("C-c T" my-template-expand-template)
    ("C-c C-t" template-expand-template)))
 

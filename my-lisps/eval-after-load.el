@@ -119,6 +119,7 @@
     "rst"
     "cmake-mode"
     "graphviz-dot-mode"
+    "go-mode"
     ("speedbar"        speedbar-mode          speedbar-key-map)
     ("speedbar"        speedbar-mode          speedbar-file-key-map)
     ("yasnippet"       nil                    yas/keymap)

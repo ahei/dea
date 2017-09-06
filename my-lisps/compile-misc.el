@@ -3,7 +3,7 @@
 ;; Author: ahei <ahei0802@gmail.com>
 ;; Keywords: 
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/compile-settings-autoloads.el
-;; Time-stamp: <2015-06-24 10:27:08 Wednesday by ahei>
+;; Time-stamp: <2017-08-16 16:14:57 Wednesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -51,6 +51,8 @@
           (compile (format "gcc -g %s -o %s" file (file-name-sans-extension base-name))))
          ((equal extension "java")
           (compile (format "javac -g %s" file)))
+         ((equal extension "go")
+          (compile "go build ./..."))
          ((equal extension "jj")
           (compile (format "javacc %s" file)))
          ((equal extension "sh")
@@ -78,7 +80,9 @@
                 ((equal extension "java")
                  (format "java %s" (file-name-sans-extension base-name)))
                 ((or (equal extension "sh") (equal major-mode 'sh-mode))
-                 (format "sh %s" base-name)))))
+                 (format "sh %s" base-name))
+                ((or (equal extension "go") (equal major-mode 'go-mode))
+                 (format "go run %s" base-name)))))
        (while (string= input "")
          (setq input (read-from-minibuffer "Command to run: " default-command nil nil 'shell-command-history default-command)))
        (list input))))
