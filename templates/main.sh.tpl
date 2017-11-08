@@ -1,6 +1,6 @@
-#!/bin/bash -l
+#!/usr/bin/env bash
 
-# Time-stamp: <2016-11-10 16:12:24 Thursday by ahei>
+# Time-stamp: <2017-11-08 10:38:12 Wednesday by ahei>
 
 # @file (>>>FILE<<<)
 # @version 1.0

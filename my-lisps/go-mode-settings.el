@@ -2,7 +2,7 @@
 
 ;; Author: ahei <ahei0802@gmail.com>
 ;; URL: http://code.google.com/p/dea/source/browse/trunk/my-lisps/go-mode-settings.el
-;; Time-stamp: <2017-09-01 09:59:01 Friday by ahei>
+;; Time-stamp: <2017-10-16 09:58:31 Monday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -50,7 +50,12 @@
                 (setq gofmt-command "gofmt")
                 (gofmt)
                 (setq gofmt-command "goimports")
-                (gofmt)))))
+                (gofmt))))
+
+  (require 'emaci)
+  (emaci-add-key-definition "." 'godef-jump)
+
+  (require 'go-autocomplete))
 
 (eval-after-load "go-mode"
   `(go-mode-settings))
