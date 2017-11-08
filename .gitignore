@@ -1,3 +1,17 @@
 .emacs.changed
 lisps/Emacs-PDE-0.2.16/lisp/tools/perldoc-cache.el
 *~
+emacser.com/org-mode-tricks.html
+lisps/cmake
+lisps/color-theme*
+lisps/ecb*/*
+lisps/elib*/*
+lisps/emacs-rails/*
+lisps/emacs-w3m/*
+lisps/template/*
+lisps/xref/*
+lisps/yasnippet*/*
+lisps/company-*.el
+lisps/company.el
+lisps/ri-emacs.rb
+lisps/ri-ruby.el
