@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2020-08-04 09:38:52 Tuesday by ahei>
+;; Time-stamp: <2020-08-04 17:55:54 Tuesday by ahei>
 
 (defconst my-emacs-path           "~/emacs/" "我的emacs相关配置文件的路径")
 (defconst my-emacs-my-lisps-path  (concat my-emacs-path "my-lisps/") "我自己写的emacs lisp包的路径")
@@ -515,7 +515,7 @@ If the file does not exist, an error is thrown.")
 
 (require 'table-settings)
 
-;; (require 'yaml-mode-settings)
+(require 'yaml-mode-settings)
 
 ;; session,可以保存很多东西，例如输入历史(像搜索、打开文件等的输入)、
 ;; register的内容、buffer的local variables以及kill-ring和最近修改的文件列表等。非常有用。

@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# Time-stamp: <08/29/2009 10:28:27 Saturday by ahei>
+# Time-stamp: <2020-08-04 17:54:56 Tuesday by ahei>
 
-bin=`dirname "$0"`
-bin=`cd "$bin"; pwd`
+home=`dirname "$0"`
+home=`cd "$home"; pwd`
 
-"${bin}"/lisps/untgz.sh
-"${bin}"/install.emacs.sh
+"${home}"/lisps/untgz.sh
+"${home}"/install.emacs.sh
+
+cd $home/lisps && git submodule update --init --recursive && git pull origin master

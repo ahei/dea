@@ -1,6 +1,6 @@
 [submodule "lisps/git-emacs"]
 	path = lisps/git-emacs
-	url = https://github.com/tsgates/git-emacs.git
+	url = https://github.com/tsgates/git-emacs
 [submodule "lisps/ezbl"]
 	path = lisps/ezbl
 	url = https://github.com/haxney/ezbl.git

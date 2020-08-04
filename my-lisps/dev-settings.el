@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2020-08-04 09:34:12 Tuesday by ahei>
+;; Time-stamp: <2020-08-04 17:55:43 Tuesday by ahei>
 
 ;; This  file is free  software; you  can redistribute  it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -220,7 +220,7 @@
                  erlang-settings
                  git-emacs-settings
                  thrift-mode-settings
-                 ;; scala-mode2-settings
+                 scala-mode2-settings
                  ;; cmake-settings
                  go-mode-settings))
 
