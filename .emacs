@@ -1,6 +1,6 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2015-05-16 23:09:56 Saturday by ahei>
+;; Time-stamp: <2020-08-04 09:38:52 Tuesday by ahei>
 
 (defconst my-emacs-path           "~/emacs/" "我的emacs相关配置文件的路径")
 (defconst my-emacs-my-lisps-path  (concat my-emacs-path "my-lisps/") "我自己写的emacs lisp包的路径")
@@ -116,7 +116,7 @@
 (require 'hl-line-settings)
 
 ;; 字体配置
-;; (require 'font-settings)
+(require 'font-settings)
 
 ;; diff
 (require 'diff-settings)
@@ -441,7 +441,7 @@ If FULL is t, copy full file name."
 (require 'org-settings)
 
 ;; 强大的发布工具
-(require 'muse-settings)
+;; (require 'muse-settings)
 
 ;; 用weblogger写WordPress博客
 ;; http://emacser.com/weblogger.htm
@@ -501,8 +501,8 @@ If the file does not exist, an error is thrown.")
     (setq browse-url-browser-function 'browse-url-generic
           browse-url-generic-program "chrome"))
 
-(require 'winpoint)
-(window-point-remember-mode 1)
+;; (require 'winpoint)
+;; (window-point-remember-mode 1)
 
 ;; 高亮vi的配置文件
 (require 'vimrc-mode)
@@ -515,7 +515,7 @@ If the file does not exist, an error is thrown.")
 
 (require 'table-settings)
 
-(require 'yaml-mode-settings)
+;; (require 'yaml-mode-settings)
 
 ;; session,可以保存很多东西，例如输入历史(像搜索、打开文件等的输入)、
 ;; register的内容、buffer的local variables以及kill-ring和最近修改的文件列表等。非常有用。
